@@ -10,6 +10,8 @@ class sensu::server(
   $redis_port         = '6379',
   $api_host           = 'localhost',
   $api_port           = '4567',
+  $api_user           = undef,
+  $api_password       = undef,
   $dashboard_host     = $::ipaddress,
   $dashboard_port     = '8080',
   $dashboard_user     = 'admin',
@@ -28,14 +30,14 @@ class sensu::server(
     ensure  => $ensure,
     owner   => 'sensu',
     group   => 'sensu',
-    mode    => '0444',
+    mode    => '0440',
   }
 
   file { '/etc/sensu/conf.d/api.json':
     ensure  => $ensure,
     owner   => 'sensu',
     group   => 'sensu',
-    mode    => '0444',
+    mode    => '0440',
   }
 
   file { '/etc/sensu/conf.d/dashboard.json':
@@ -62,9 +64,11 @@ class sensu::server(
   }
 
   sensu_api_config { $::fqdn:
-    ensure => $ensure,
-    host   => $api_host,
-    port   => $api_port,
+    ensure   => $ensure,
+    host     => $api_host,
+    port     => $api_port,
+    user     => $api_user,
+    password => $api_password,
   }
 
   sensu_dashboard_config { $::fqdn:

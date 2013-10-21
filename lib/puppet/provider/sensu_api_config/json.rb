@@ -75,4 +75,33 @@ Puppet::Type.type(:sensu_api_config).provide(:json) do
   def host=(value)
     conf['api']['host'] = value
   end
+
+  # Public: Retrieve the api username
+  #
+  # Returns the String hostname.
+  def user
+    conf['api']['user']
+  end
+
+  # Public: Set the api user
+  #
+  # Returns nothing.
+  def user=(value)
+    conf['api']['user'] = value
+  end
+
+  # Public: Retrieve the password for the api
+  #
+  # Returns the String password.
+  def password
+    conf['api']['password']
+  end
+
+  # Public: Set the api password
+  #
+  # Returns nothing.
+  def password=(value)
+    conf['api']['password'] = value
+  end
+
 end

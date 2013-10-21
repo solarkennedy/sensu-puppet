@@ -34,6 +34,9 @@ describe 'sensu', :type => :class do
       'dashboard_password'  => 'secret',
       'enabled'             => 'false'
     )}
+    # Variables should be undefined 
+    it { should contain_class('sensu::server').without_api_user }
+    it { should contain_class('sensu::server').without_api_password }
 
     it { should contain_class('sensu::client').with(
       'address'       => '1.2.3.4',
@@ -64,6 +67,8 @@ describe 'sensu', :type => :class do
       :redis_port               => '2345',
       :api_host                 => 'apihost',
       :api_port                 => '3456',
+      :api_user                 => 'api_test_user',
+      :api_password             => 'api_test_password',
       :dashboard_host           => 'dashhost',
       :dashboard_port           => '5678',
       :dashboard_user           => 'dashuser',
@@ -96,6 +101,8 @@ describe 'sensu', :type => :class do
       'redis_port'          => '2345',
       'api_host'            => 'apihost',
       'api_port'            => '3456',
+      'api_user'            => 'api_test_user',
+      'api_password'        => 'api_test_password',
       'dashboard_host'      => 'dashhost',
       'dashboard_port'      => '5678',
       'dashboard_user'      => 'dashuser',
